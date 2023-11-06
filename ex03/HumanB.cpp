@@ -13,6 +13,6 @@ void HumanB::attack() {
 	std::cout << name << " attacks with their " << weapon->getType() << std::endl;
 }
 
-void HumanB::setWeapon(Weapon s_weapon) {
-	this -> weapon = &s_weapon;
+void HumanB::setWeapon(Weapon *s_weapon) {
+	this -> weapon = s_weapon;
 }
