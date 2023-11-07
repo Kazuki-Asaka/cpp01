@@ -5,6 +5,10 @@
 void	copy(std::string filename, std::string s1, std::string s2) {
 	std::string	new_file;
 
+	if (s1.empty()) {
+		std::cerr << "s1 is empty" << std::endl;
+		std::exit(1);
+	}
 	new_file = filename + ".replace";
 	std::ifstream ifs(filename);
 	if (!ifs) {
@@ -18,21 +22,22 @@ void	copy(std::string filename, std::string s1, std::string s2) {
 	}
 	while (!ifs.eof()) {
 		std::string buf;
-		std::getline(ifs, buf);
-		// if (!ifs) {
-		// 	std::cerr << "read error" << std::endl;
-		// 	std::exit(1);
-		// }
+		if (!std::getline(ifs, buf) && !ifs.eof()) {
+			std::cerr << "read error" << std::endl;
+			std::exit(1);
+		}
 		size_t position;
-		position = - ( s2.length() + 1);
+		position = 0;
 		while (position != buf.npos) {
-			position = buf.find(s1, position + s2.length() + 1);
+			position = buf.find(s1, position);
 			if (position != buf.npos) {
 				buf.erase(position, s1.length());
 				buf.insert(position, s2);
+				position = position + s2.length();
 			}
 		}
-		buf += "\n";
+		if (!ifs.eof())
+			buf += "\n";
 		ofs << buf;
 	}
 }
@@ -43,7 +48,7 @@ int	main() {
 	std::string after;
 
 	filename = "test";
-	before = "test";
+	before = "";
 	after = "t";
 	copy(filename, before, after);
 }
