@@ -20,19 +20,23 @@ void Harl::complain(std::string level) {
 	for (size_t i = 0; i < 4; i++) {
 		if (level_array[i] == level) {
 			// (this->function_array[i])();
-			(this->function_array[i])();
+			function_array[i]();
 			break ;
 		}
 	}
 }
 
-Harl::Harl():level_array{"debug", "info", "warning", "error"}{
-	// function_array[0] = &Harl::debug;
-	// function_array[1] = &Harl::info;
-	// function_array[2] = &Harl::warning;
-	// function_array[3] = &Harl::error;
+Harl::Harl() {
+	level_array[0] = "debug";
+	level_array[1] = "info";
+	level_array[2] = "warning";
+	level_array[3] = "error";
 	function_array[0] = &Harl::debug;
 	function_array[1] = &Harl::info;
 	function_array[2] = &Harl::warning;
 	function_array[3] = &Harl::error;
+}
+
+Harl::~Harl() {
+
 }
