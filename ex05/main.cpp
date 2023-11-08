@@ -4,5 +4,12 @@ int main() {
 	Harl harl;
 
 	// harl.complain("error");
-	std::cout << harl.level_array[1] << std::endl;
+	harl.complain("debug");
+	std::cout << "---------------------------" << std::endl;
+	harl.complain("info");
+	std::cout << "---------------------------" << std::endl;
+	harl.complain("warning");
+	std::cout << "---------------------------" << std::endl;
+	harl.complain("error");
+	std::cout << "---------------------------" << std::endl;
 }
